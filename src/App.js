@@ -10,7 +10,8 @@ const song = {
 	songURL:
 		"https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
 	coverURL: "https://i.ytimg.com/vi/wC5OFVMCLS8/maxresdefault.jpg",
-	active: false
+	active: false,
+	liked: false
 };
 
 const song2 = {
@@ -21,7 +22,8 @@ const song2 = {
 	songURL:
 		"https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
 	coverURL: "https://i.ytimg.com/vi/wC5OFVMCLS8/maxresdefault.jpg",
-	active: false
+	active: false,
+	liked: false
 };
 
 const song3 = {
@@ -32,7 +34,8 @@ const song3 = {
 	songURL:
 		"https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
 	coverURL: "https://i.ytimg.com/vi/wC5OFVMCLS8/maxresdefault.jpg",
-	active: true
+	active: true,
+	liked: true
 };
 
 const songs = [song, song2, song3];
