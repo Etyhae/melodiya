@@ -18,7 +18,8 @@ const song = {
 		"https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
 	coverURL: "https://avatars.yandex.net/get-music-content/4382102/c247b5fa.a.18452239-1/800x800",
 	active: false,
-	liked: false
+	liked: false,
+	listensCount : 9284821
 };
 
 const song2 = {
@@ -30,7 +31,8 @@ const song2 = {
 		"https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
 	coverURL: "https://avatars.yandex.net/get-music-content/4382102/c247b5fa.a.18452239-1/800x800",
 	active: false,
-	liked: false
+	liked: false,
+	listensCount : 2377923
 };
 
 const song3 = {
@@ -42,10 +44,13 @@ const song3 = {
 		"https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
 	coverURL: "https://avatars.yandex.net/get-music-content/4382102/c247b5fa.a.18452239-1/800x800",
 	active: true,
-	liked: true
+	liked: true,
+	listensCount : 73927
 };
 
 const songs = [song, song2, song3];
+
+const chartSongs = [song, song2, song3, song, song2, song3, song, song2, song3, song, song2, song3]
 
 const getBGColor = async (image) => {
 	const fac = new FastAverageColor;
@@ -101,24 +106,13 @@ function App() {
 					</section>
 				</div>
 			</div>
-			<div className="min-h-screen">
-				<div className={`flex w-screen bg-[${getBGColor(song.coverURL)}]`}>
-					<div className="w-1/3 py-12 pl-12">
-						{songs.map((song) => (
-							<Chart song={song} />
-						))}
+			<div className="min-h-screen max-h-screen">
+				<div className={`flex w-screen p-6 bg-slate-800`}>
+					<div className="columns-2 md:columns-2 lg:columns-3">
+						{chartSongs.map((song, index) => (
+								<Chart song={song} place={index} />
+							))}
 					</div>
-					<div className="w-1/3 py-12">
-						{songs.map((song) => (
-							<Chart song={song} />
-						))}
-					</div>
-					<div className="w-1/3 py-12 pr-12">
-						{songs.map((song) => (
-							<Chart song={song} />
-						))}
-					</div>
-
 				</div>
 			</div>
 		</div>
