@@ -14,6 +14,10 @@
   }
 }
 
+.song-active {
+  background-color:rgb(148 163 184 / 0.2); /*bg-slate-400*/
+}
+
 
 .component {
   background-color: white;
@@ -33,6 +37,9 @@
   justify-content: center;
 }
 
+.playButton:hover {
+  opacity: 0.8;
+}
 .subTitle {
   margin-top: -1em;
   color: #4f4f4f;
