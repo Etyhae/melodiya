@@ -4,22 +4,23 @@ import { useState } from 'react';
 
 const Playlist = ({ song }) => {
 	const [songLiked, setSongLiked] = useState(song.liked);
-	
-	function handlerClick() {
+	const [songActive, setSongActive] = useState(song.active);
+
+	function likeHandlerClick() {
+		song.liked = !song.liked;
 		setSongLiked(!songLiked);
 	}
 
+	function songHandlerClick() {
+		song.active = !song.active;
+		setSongActive(!songActive);
+	}
+
 	return (
-		<div
-			style={{
-				"background-color": ` ${
-					song.active ? "rgba(203,213,225, 0.2)" : "none"
-				}`,
-			}}
-		>
-			<div className="flex flex-row justify-center justify-items-center mr-2 ml-3">
+		<button className={`${songActive ? "bg-slate-400/30" : ""} w-[100%]`} onClick={songHandlerClick}>
+			<div className="w-full flex flex-row lg:justify-center justify-between lg:px-8 px-6 justify-items-center content-between hover:opacity-90 hover:scale-105 transition delay-150 duration-300 ease-linear">
 				<img
-					className="h-[12vh] w-[12vh] object-cover mr-2 float-left"
+					className="h-[8vh] w-[8vh] sm:w-[8vh] sm:h-[8vh] object-cover mr-2 float-left rounded-md"
 					src={song.coverURL}
 					alt="coverImg"
 				/>
@@ -27,13 +28,13 @@ const Playlist = ({ song }) => {
 					<p className="text-base text-center text-white">{song.label}</p>
 					<p className="text-sm text-center text-slate-400">{song.author}</p>
 				</div>
-				<button className="playButton float-right" onClick={handlerClick}>
+				<button className="playButton float-right" onClick={likeHandlerClick}>
 					<IconContext.Provider value={{ size: "1.5rem", color: "#27AE60" }}>
 						{songLiked ? <BiSolidHeart /> : <BiHeart />}
 					</IconContext.Provider>
 				</button>
 			</div>
-		</div>
+		</button>
 	);
 };
 

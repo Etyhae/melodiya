@@ -41,7 +41,7 @@ const useClickHandler = () => {
 	return [toHide, toggleHide];
 };
 
-const Player = ({ url }) => {
+const Player = ({ url, size }) => {
 	const [isPlaying, toggle, volume, changeVolume] = useAudio(url);
 
 	const getIcon = (volume) => {
@@ -60,32 +60,32 @@ const Player = ({ url }) => {
 
 
 	return (
-		<div>
+		<div className="flex flex-row h-full align-middle">
 			<button className="playButton">
-				<IconContext.Provider value={{ size: "8vh", color: "#27AE60" }}>
+				<IconContext.Provider value={{ size: size + "vh", color: "#27AE60" }}>
 					<BiSkipPrevious />
 				</IconContext.Provider>
 			</button>
 			{!isPlaying ? (
 				<button className="playButton" onClick={toggle}>
-					<IconContext.Provider value={{ size: "8vh", color: "#27AE60" }}>
+					<IconContext.Provider value={{ size: size + "vh", color: "#27AE60" }}>
 						<AiFillPlayCircle />
 					</IconContext.Provider>
 				</button>
 			) : (
 				<button className="playButton" onClick={toggle}>
-					<IconContext.Provider value={{ size: "8vh", color: "#27AE60" }}>
+					<IconContext.Provider value={{ size: size + "vh", color: "#27AE60" }}>
 						<AiFillPauseCircle />
 					</IconContext.Provider>
 				</button>
 			)}
 			<button className="playButton">
-				<IconContext.Provider value={{ size: "8vh", color: "#27AE60" }}>
+				<IconContext.Provider value={{ size: size + "vh", color: "#27AE60" }}>
 					<BiSkipNext />
 				</IconContext.Provider>
 			</button>
 			<button className="playButton scale-75" onClick={toggleHide}>
-				<IconContext.Provider value={{ size: "8vh", color: "#27AE60" }}>
+				<IconContext.Provider value={{ size: size + "vh", color: "#27AE60" }}>
 					{getIcon(volume)}
 				</IconContext.Provider>
 			</button>
@@ -96,9 +96,8 @@ const Player = ({ url }) => {
 				max={1.0}
 				step={0.01}
 				value={volume}
-				className="flex flex-col bg-none border-none align-top"
-                style={{'display':` ${toHide ? 'none' : 'flex'}`}}
-
+				className="flex bg-none border-none align-top"
+				style={{ 'display': ` ${toHide ? 'none' : 'flex'}` }}
 			/>
 		</div>
 	);
