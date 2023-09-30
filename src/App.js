@@ -5,7 +5,7 @@ import Playlist from "./components/Playlist";
 import { IconContext } from "react-icons";
 import { BiMenu } from "react-icons/bi";
 
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import Chart from "./components/Chart";
 import { FastAverageColor } from "fast-average-color";
 
@@ -52,14 +52,19 @@ const songs = [song, song2, song3];
 
 const chartSongs = [song, song2, song3, song, song2, song3, song, song2, song3, song, song2, song3]
 
-const getBGColor = async (image) => {
-	const fac = new FastAverageColor;
+const getBGColor = async (image, setFunction) => {
+	const fac = new FastAverageColor();
 	const color = await fac.getColorAsync(image);
-	return color.hex;
+	setFunction(color.hex)
 }
 
 function App() {
 	const [isHidden, setIsHidden] = useState(true);
+	const [chartBGColor, setChartBGColor] = useState();
+
+	useEffect(() => {
+		getBGColor(song.coverURL, setChartBGColor);
+	}, []);
 
 	const handleClick = e => {
 	  setIsHidden(isHidden => !isHidden);
@@ -107,7 +112,7 @@ function App() {
 				</div>
 			</div>
 			<div className="min-h-screen max-h-screen">
-				<div className={`flex w-screen p-6 bg-slate-800`}>
+				<div className={`flex w-screen p-6 bg-[${chartBGColor}]`} style={{ backgroundColor: chartBGColor }}>
 					<div className="columns-2 md:columns-2 lg:columns-3">
 						{chartSongs.map((song, index) => (
 								<Chart song={song} place={index} />
