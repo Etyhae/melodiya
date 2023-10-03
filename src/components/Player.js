@@ -37,7 +37,6 @@ const useClickHandler = () => {
 	const toggleHide = () => setHidden(!toHide);
 
 	const [toHide, setHidden] = useState(true);
-	console.log(toHide);
 	return [toHide, toggleHide];
 };
 

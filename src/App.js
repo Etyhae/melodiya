@@ -15,7 +15,7 @@ const song = {
   label: "Metamorphosis 3",
   authors: "zxcursed, INTERWORLD",
   songURL:
-    "https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
+    "1",
   coverURL:
     "https://avatars.yandex.net/get-music-content/8096180/48de10d3.a.25444202-1/800x800",
   active: false,
@@ -29,7 +29,7 @@ const song2 = {
   label: "ДРЕССКОД",
   authors: "Nikitata",
   songURL:
-    "https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
+    "1",
   coverURL:
     "https://avatars.yandex.net/get-music-content/4382102/c247b5fa.a.18452239-1/800x800",
   active: false,
@@ -43,7 +43,7 @@ const song3 = {
   label: "ДРЕССКОД",
   authors: "Nikitata",
   songURL:
-    "https://s44vlx.storage.yandex.net/get-mp3/b9285fe3ea264bbde7e2bbbdd7076f8e/000602288cf0b268/rmusic/U2FsdGVkX1-AOE5itjTSUhQXPHTi6UVI8voIpe-dWxTdUq9HEiXG0Wmj4k-tCrybtrFOMPHg-dURnsUr4pAhRrsqD5EihtJW8_23Wv6_QXE/67f54a816258fed87d308f7ad72206ba5aa7d8b403e29531f90240a37c589c49/19171?track-id=92228791&play=false",
+    "1",
   coverURL:
     "https://avatars.yandex.net/get-music-content/4382102/c247b5fa.a.18452239-1/800x800",
   active: true,
@@ -71,13 +71,22 @@ const chartSongs = [
 const getBGColor = async (image, setFunction) => {
   const fac = new FastAverageColor();
   const color = await fac.getColorAsync(image);
-  setFunction(color.hexa.slice(0,-2) + "dd");
+  setFunction(color.hexa.slice(0, -2) + "dd");
 };
 
 function App() {
   const [isHidden, setIsHidden] = useState(true);
   const [chartBGColor, setChartBGColor] = useState();
+  const [scroll, setScroll] = React.useState(0);
 
+  const handleScroll = () => {
+    setScroll(window.scrollY);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(() => {
     getBGColor(song.coverURL, setChartBGColor);
   }, []);
@@ -94,13 +103,15 @@ function App() {
           style={{ backgroundImage: `url(${song.coverURL})` }}
         >
           <aside
-            className={`${isHidden? "hidden": "block"} md:block columns-1 z-50 right-0 md:absolute fixed h-screen w-screen md:w-1/5 backdrop-blur-lg bg-slate-900/60 block transition delay-150 duration-300 ease-linear`}
+            className={`${
+              isHidden ? "hidden" : "block"
+            } md:block columns-1 z-50 right-0 md:absolute fixed h-screen w-screen md:w-1/5 backdrop-blur-lg bg-slate-900/60 block transition delay-150 duration-300 ease-linear`}
           >
-			<div className="w-full space-y-4">
-				{songs.map((song) => (
-				<Playlist song={song} />
-				))}
-			</div>
+            <div className="w-full space-y-4">
+              {songs.map((song) => (
+                <Playlist song={song} />
+              ))}
+            </div>
           </aside>
           <header className="h-screen flex flex-col items-center justify-center content-center text-base text-white backdrop-blur-lg backdrop-brightness-50 relative">
             <div className="absolute inset-x-0 top-0 content-start mt-2">
@@ -122,7 +133,11 @@ function App() {
               <p className="text-xl text-slate-400">{song.authors}</p>
             </div>
           </header>
-          <section className="z-50 fixed flex w-full bg-slate-400/20 p-2 bottom-0">
+          <section
+            className={`${
+              scroll > 10 ? "bg-slate-900" : "bg-slate-400/20"
+            } z-50 fixed flex w-full p-2 bottom-0 transition-colors delay-150 duration-200 ease-linear`}
+          >
             <div className="flex justify-start h-full w-screen">
               <Player url={song.songURL} size="6" />
             </div>
@@ -136,15 +151,17 @@ function App() {
           </section>
         </div>
       </div>
-      <div className="h-full w-screen mb-20" style={{ backgroundColor: chartBGColor }}>
-		<div className="columns-2 sm:columns-3 p-2">
-			{chartSongs.map((song, index) => (
-				<Chart song={song} place={index} />
-			))}
-		</div>
-          
+      <div
+        className="h-full w-screen mb-20"
+        style={{ backgroundColor: chartBGColor }}
+      >
+        <div className="columns-2 sm:columns-3 p-2">
+          {chartSongs.map((song, index) => (
+            <Chart song={song} place={index} />
+          ))}
         </div>
       </div>
+    </div>
   );
 }
 
