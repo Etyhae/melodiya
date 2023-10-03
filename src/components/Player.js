@@ -60,7 +60,7 @@ const Player = ({ url, size }) => {
 
 
 	return (
-		<div className="flex flex-row h-full align-middle">
+		<div className="flex flex-row align-middle">
 			<button className="playButton">
 				<IconContext.Provider value={{ size: size + "vh", color: "#27AE60" }}>
 					<BiSkipPrevious />
