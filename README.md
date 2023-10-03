@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Melodiya - Музыкальный Онлайн Плеер на React.js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Описание проекта
 
-## Available Scripts
+"Melodiya" - это учебный проект музыкального онлайн плеера, разработанный на React.js. Этот проект создан с целью изучения и практики разработки веб-приложений на React.js. Плеер сможет предоставлять пользователю возможность воспроизводить и управлять музыкальными треками, создавать плейлисты и настраивать визуальный интерфейс.
 
-In the project directory, you can run:
+## Будущая функциональность
 
-### `npm start`
+- Поиск и воспроизведение музыкальных треков.
+- Создание и управление плейлистами.
+- Регулировка громкости и баланса звука.
+- Поддержка сортировки и фильтрации музыкальной библиотеки.
+- Отображение информации о текущем треке.
+- Интерактивный пользовательский интерфейс.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Начало работы
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Эти инструкции помогут вам скопировать проект и запустить его на вашей локальной машине для разработки и тестирования. Смотрите раздел [Установка](#установка) для получения более подробной информации.
 
-### `npm test`
+### Предварительные требования
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Перед началом работы убедитесь, что у вас установлены следующие программные компоненты:
 
-### `npm run build`
+- [Node.js](https://nodejs.org/) (рекомендуется версия 14 или выше)
+- [npm](https://www.npmjs.com/) (устанавливается вместе с Node.js)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Установка
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Пошаговая инструкция о том, как получить копию проекта и запустить его на вашей локальной машине:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Клонируйте репозиторий:
 
-### `npm run eject`
+   ```shell
+   git clone https://github.com/Etyhae/melodiya-frontend.git
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Перейдите в каталог проекта:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```shell
+   cd melodiya-frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Установите зависимости:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```shell
+   npm install
 
-## Learn More
+4. Запустите приложение:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```shell
+   npm run start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+После выполнения этих шагов, "Melodiya" должна быть доступна в вашем веб-браузере по адресу http://localhost:3000

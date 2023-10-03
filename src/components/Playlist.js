@@ -24,9 +24,9 @@ const Playlist = ({ song }) => {
 					src={song.coverURL}
 					alt="coverImg"
 				/>
-				<div className="flex flex-col justify-items-center items-center justify-center pl-2 pr-20">
-					<p className="text-base text-center text-white">{song.label}</p>
-					<p className="text-sm text-center text-slate-400">{song.author}</p>
+				<div className="flex flex-col justify-items-center text-left justify-center pl-2 pr-20">
+					<p className="text-base text-white">{song.label}</p>
+					<p className="text-sm text-slate-400">{song.author}</p>
 				</div>
 				<button className="playButton float-right" onClick={likeHandlerClick}>
 					<IconContext.Provider value={{ size: "1.5rem", color: "#27AE60" }}>
