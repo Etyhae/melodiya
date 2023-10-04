@@ -18,7 +18,7 @@ const Playlist = ({ song }) => {
 
   return (
     <button
-      className={`${songActive ? "bg-slate-400/30" : ""} py-2 px-4 lg:p-2 w-full text-white flex flex-row justify-between h-full gap-4 items-center hover:opacity-90 md:hover:scale-105 transition delay-150 duration-300 ease-linear`}
+      className={`${songActive ? "bg-slate-400/30" : ""} py-2 px-4 lg:p-2 w-screen md:w-full text-white flex flex-row justify-between h-full items-center hover:opacity-90 md:hover:scale-105 transition delay-150 duration-300 ease-linear`}
       onClick={songHandlerClick}
     >
         <img

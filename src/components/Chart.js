@@ -11,7 +11,7 @@ const Chart = ({ song, place }) => {
   const zeroLength = 2;
 
   return (
-      <button className={`p-2 lg:px-[20%] justify-items-stretch h-full text-white flex flex-row gap-4 items-center hover:opacity-90 hover:scale-105 transition delay-150 duration-300 ease-linear`} onClick={songHandlerClick}>
+      <button className={`p-2 lg:px-[20%] justify-items-stretch h-full text-white flex flex-row gap-4 items-center hover:opacity-90 md:hover:scale-105 transition delay-150 duration-300 ease-linear`} onClick={songHandlerClick}>
             <p className="mr-2">{String(place + 1).padStart(zeroLength, '0')}</p>
           <img
             className="h-[4vh] w-[4vh] object-cover float-left rounded-md hidden lg:flex"

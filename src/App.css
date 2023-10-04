@@ -5,6 +5,11 @@
   }
 }
 
+.fade-enter, .fade-exit {
+  opacity: 0;
+  transform: translateX(100%); 
+}
+
 @keyframes song-cover-spin {
   from {
     transform: rotate(0deg);
