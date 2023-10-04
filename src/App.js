@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { BiMenu } from "react-icons/bi";
+import React, { useEffect, useState } from "react";
 import { FastAverageColor } from "fast-average-color";
 
 import "./App.css";
