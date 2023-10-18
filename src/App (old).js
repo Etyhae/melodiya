@@ -6,7 +6,7 @@ import { FastAverageColor } from "fast-average-color";
 import "./App.css";
 
 import Player from "./components/Player.js";
-import Playlist from "./components/Playlist";
+import Playlist from "./components/PlaylistTrack";
 import Chart from "./components/Chart";
 import LikedPlaylists from "./components/LikedPlaylists";
 
