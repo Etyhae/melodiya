@@ -26,12 +26,12 @@ const PlaylistAside = (props) => {
           </button>
         </div>
         <div
-          className={`hidden py-2 px-2 lg:p-2 w-screen md:w-full text-white md:flex flex-row justify-center h-20 items-center hover:opacity-90 md:hover:scale-105 transition delay-150 duration-300 ease-linear`}
+          className={`${props.isAsideActive ? "justify-end" : "justify-center"} hidden py-2 px-2 lg:p-2 w-screen md:w-full text-white md:flex flex-row  h-20 items-center hover:opacity-80 transition delay-150 duration-300 ease-linear`}
         >
-          <button onClick={() => props.func.asideSwitch()}>
+          <button className={`${props.isAsideActive ? "pr-2" : ""}`} onClick={() => props.func.asideSwitch()}>
             <IconContext.Provider
               value={{
-                size: "4rem",
+                size: "3rem",
                 color: "#27AE60",
               }}
             >

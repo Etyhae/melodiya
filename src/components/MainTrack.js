@@ -15,8 +15,8 @@ const MainTrack = (props) => {
         style={{ backgroundImage: `url(${props.coverURL})` }}
       >
         {/* Current song */}
-        <header className={`h-screen flex flex-col items-center justify-center content-center text-base text-white backdrop-blur-lg backdrop-brightness-50 relative ${props.isAsideActive ? "md:pr-[20%]" : ""}`}>
-          <div className={`absolute inset-x-0 top-0 content-start mt-2 ${props.isAsideActive ? "md:pr-[20%]" : ""}`}>
+        <header className={`h-screen flex flex-col items-center justify-center content-center text-base text-white backdrop-blur-lg backdrop-brightness-50 relative ${props.isAsideActive ? "md:pr-[20%]" : "md:pr-[5rem]"}`}>
+          <div className={`absolute inset-x-0 top-0 content-start mt-2 ${props.isAsideActive ? "md:pr-[20%]" : "md:pr-[5rem]"}`}>
             <p className="text-sm text-center text-slate-400">Сейчас играет</p>
             <p className="text-base text-center">{props.playlistName}</p>
           </div>

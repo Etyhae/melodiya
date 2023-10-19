@@ -8,11 +8,14 @@ import PlaylistsPicking from "./components/PlaylistsPicking";
 
 import { FastAverageColor } from "fast-average-color";
 import {
+  BiHeart,
   BiMenu,
   BiPause,
   BiPlay,
+  BiPlus,
   BiSkipNext,
   BiSkipPrevious,
+  BiSolidHeart,
 } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import { useEffect } from "react";
@@ -134,7 +137,9 @@ function App() {
   const [playlistCurrent, setPlaylist] = useState(playlist);
   const [songCurrent, setSong] = useState(playlistCurrent.songs[0]);
   const [BGColor, setBGColor] = useState(getBGColor(songCurrent.coverURL));
-  const [isAsideActive, setAsideActive] = useState(screenW < 768 ? false : true);
+  const [isAsideActive, setAsideActive] = useState(
+    screenW < 768 ? false : true
+  );
 
   const asideSwitch = () => {
     setAsideActive(!isAsideActive);
@@ -168,6 +173,17 @@ function App() {
 
   const [isHidden, setIsHidden] = useState(true);
 
+  const [isLiked, setSongLiked] = useState(songCurrent.liked); // Redux
+
+  const likeHandlerClick = () => {
+    setSongLiked(!isLiked);
+  };
+
+
+  const cutLabel = (label) => {
+    return label.length > 30 ? label.slice(0, 30).trim() + "...": label;
+  }
+
   return (
     <div className="pb-[4rem]">
       <PlaylistAside
@@ -186,14 +202,14 @@ function App() {
         isAsideActive={isAsideActive}
       />
 
-      <div className="fixed z-50 bg-black bottom-0 w-screen">
+      <div className="fixed z-50 bg-black bottom-0 w-screen flex flex-row items-center h-16">
         <button
           onClick={() => skipSong(-1)}
           disabled={playlistCurrent.songs.indexOf(songCurrent) == 0 ? 1 : 0}
         >
           <IconContext.Provider
             value={{
-              size: "4rem",
+              size: "3rem",
               color:
                 playlistCurrent.songs.indexOf(songCurrent) == 0
                   ? "gray"
@@ -205,7 +221,7 @@ function App() {
         </button>
 
         <button onClick={playSwitch}>
-          <IconContext.Provider value={{ size: "4rem", color: "#27AE60" }}>
+          <IconContext.Provider value={{ size: "3rem", color: "#27AE60" }}>
             {isPlaying ? <BiPlay /> : <BiPause />}
           </IconContext.Provider>
         </button>
@@ -220,7 +236,7 @@ function App() {
         >
           <IconContext.Provider
             value={{
-              size: "4rem",
+              size: "3rem",
               color:
                 playlistCurrent.songs.indexOf(songCurrent) ==
                 playlist.songs.length - 1
@@ -231,8 +247,43 @@ function App() {
             <BiSkipNext />
           </IconContext.Provider>
         </button>
-
-        <button onClick={() => asideSwitch()}>
+        <div className="max-w-[20rem] flex flex-row">
+          <img
+            className={`h-12 w-12 object-cover rounded-md ml-8 mr-4`}
+            src={songCurrent.coverURL}
+            alt="coverImg"
+          />
+          <div className="flex flex-col">
+            <p className="text-sm text-white font-semibold underline decoration-solid underline-offset-8 leading-loose">
+              {cutLabel(songCurrent.label)}
+            </p>
+            <p className="text-sm text-slate-400">{songCurrent.authors}</p>
+          </div>
+        </div>
+        <button className="pl-6 flex" onClick={likeHandlerClick}>
+          <IconContext.Provider
+            value={{
+              size: "1.5rem",
+              color: "#27AE60",
+            }}
+          >
+            {isLiked ? <BiSolidHeart /> : <BiHeart />}
+          </IconContext.Provider>
+        </button>
+        <button className="pl-4 flex">
+          <IconContext.Provider
+            value={{
+              size: "1.5rem",
+              color: "#27AE60",
+            }}
+          >
+            <BiPlus />
+          </IconContext.Provider>
+        </button>
+        <button
+          className="ml-auto pr-4 flex md:hidden"
+          onClick={() => asideSwitch()}
+        >
           <IconContext.Provider
             value={{
               size: "4rem",

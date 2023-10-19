@@ -4,7 +4,7 @@ const PlaylistsPicking = (props) => {
   const listPlaylists = props.listPlaylists;
   return (
     <section
-      className={`grid grid-rows-1 text-white p-4 ${props.isAsideActive ? "" : "md:pr-[20%]"}`}
+      className={`grid grid-rows-1 text-white p-4 ${props.isAsideActive ? "md:pr-[20%]" : "md:pr-[5rem]"}`}
       style={{ backgroundColor: props.BGcolor + "55" }}
     >
       <p className="font-medium text-center text-xl pb-2">Ваши плейлисты</p>
