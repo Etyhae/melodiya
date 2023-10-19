@@ -5,6 +5,17 @@
   }
 }
 
+.pulse-wrapper {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+
+.paused {
+  animation-play-state: paused !important;
+}
+
 .fade-enter, .fade-exit {
   opacity: 0;
   transform: translateX(100%); 
