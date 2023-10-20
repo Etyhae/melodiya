@@ -1,26 +1,29 @@
 import React, { useState } from "react";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import { useDispatch } from "react-redux";
+import {
+  setPlaylist,
+  setSong,
+  togglePlay,
+  toggleAside,
+} from "./actions/actions";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useEffect } from "react";
 
 import "./App.css";
 
 import MainTrack from "./components/MainTrack";
 import PlaylistAside from "./components/PlaylistAside";
 import PlaylistsPicking from "./components/PlaylistsPicking";
+import ControlCentre from "./components/ControlCentre";
 
 import { FastAverageColor } from "fast-average-color";
-import {
-  BiHeart,
-  BiMenu,
-  BiPause,
-  BiPlay,
-  BiPlus,
-  BiSkipNext,
-  BiSkipPrevious,
-  BiSolidHeart,
-} from "react-icons/bi";
-import { IconContext } from "react-icons";
-import { useEffect } from "react";
+
+const screenW = window.screen.width;
 
 const song = {
+  id: 7392177291,
   playlistID: 29219219129,
   playlistName: "Metamorphosis 3",
   label: "Metamorphosis 3",
@@ -34,6 +37,7 @@ const song = {
 };
 
 const song2 = {
+  id: 28739173218,
   playlistID: 29219219129,
   playlistName: "Memories",
   label: "Memories",
@@ -46,6 +50,7 @@ const song2 = {
   listensCount: 10000,
 };
 const song3 = {
+  id: 729872791,
   playlistID: 29219219129,
   playlistName: "Totally Spices",
   label: "Totally Spices",
@@ -58,6 +63,7 @@ const song3 = {
   listensCount: 10000,
 };
 const song4 = {
+  id: 186168812,
   playlistID: 29219219129,
   playlistName: "Katana",
   label: "Katana",
@@ -70,6 +76,7 @@ const song4 = {
   listensCount: 10000,
 };
 const song5 = {
+  id: 263961293621,
   playlistID: 29219219129,
   playlistName: "CHAINSAW",
   label: "CHAINSAW",
@@ -82,6 +89,7 @@ const song5 = {
   listensCount: 10000,
 };
 const song6 = {
+  id: 8379172198,
   playlistID: 29219219129,
   playlistName: "Panic Attack",
   label: "Panic Attack",
@@ -90,10 +98,11 @@ const song6 = {
   coverURL:
     "https://avatars.yandex.net/get-music-content/6296749/c26c8b10.a.22977219-1/800x800",
   active: false,
-  liked: false,
+  liked: true,
   listensCount: 10000,
 };
 const song7 = {
+  id: 3612963921,
   playlistID: 29219219129,
   playlistName: "tsukuyomi (Prod. by Pxlsdead)",
   label: "tsukuyomi (Prod. by Pxlsdead)",
@@ -125,64 +134,125 @@ const playlist2 = {
 };
 
 const likedPlaylists = [playlist, playlist2];
-const screenW = window.screen.width;
 
 function App() {
+  // const [isAsideActive, setAsideActive] = useState(
+  //   screenW < 768 ? false : true
+  // );
+
+  // const asideSwitch = () => {
+  //   setAsideActive(!isAsideActive);
+  // };
+
+  // useEffect(() => {
+  //   getBGColor(songCurrent.coverURL);
+  // }, []);
+
+  // const skipSong = (way) => {
+  //   setSong(
+  //     (songCurrent) =>
+  //       playlistCurrent.songs[playlistCurrent.songs.indexOf(songCurrent) + way]
+  //   );
+  // };
+
+  // const songSwitch = (song) => {
+  //   setSong(playlistCurrent.songs[playlistCurrent.songs.indexOf(song)]);
+  // };
+
+  const isPlaying = useSelector((state) => state.isPlaying);
+  const playlistCurrent = useSelector((state) => state.playlist);
+  const songCurrent = useSelector((state) => state.song);
+  const isAsideActive = useSelector((state) => state.isAsideActive);
+
+  const dispatch = useDispatch();
+
+  const playlistSwitch = (playlist) => {
+    dispatch(setPlaylist(playlist));
+    dispatch(setSong(playlist.songs[0]));
+  };
+
+  const playSwitch = () => {
+    dispatch(togglePlay());
+  };
+
+  const asideSwitch = () => {
+    dispatch(toggleAside());
+  };
+
+  const songSwitch = (song) => {
+    dispatch(
+      setSong(playlistCurrent.songs[playlistCurrent.songs.indexOf(song)])
+    );
+  };
+
+  const skipSong = (way) => {
+    dispatch(
+      setSong(
+        playlistCurrent.songs[playlistCurrent.songs.indexOf(songCurrent) + way]
+      )
+    );
+  };
+
+  // const getBGColor = async (image) => {
+  //   const corsAnywhereURL = "https://cors-anywhere.herokuapp.com/"; // URL "CORS Anywhere"
+  //   const imageURL = songCurrent.coverURL;
+  //   const fac = new FastAverageColor();
+  
+  //   try {
+  //     const response = await fetch(corsAnywhereURL + imageURL);
+  //     const blob = await response.blob();
+  //     const color = await fac.getColorAsync(blob);
+  //     setBGColor(color.hex);
+  //   } catch (error) {
+  //     console.error("Ошибка при получении цвета изображения:", error);
+  //   }
+  // };
+  
+  
+  // const [BGColor, setBGColor] = useState("");
+  
+  // useEffect(() => {
+  //   const img = new Image();
+  //   img.src = songCurrent.coverURL;
+  //   img.onload = () => {
+  //     getBGColor(img);
+  //   };
+  // }, [songCurrent.coverURL]);
+
+
   const getBGColor = async (image) => {
     const fac = new FastAverageColor();
     const color = await fac.getColorAsync(image);
     setBGColor(color.hex);
   };
 
-  const [playlistCurrent, setPlaylist] = useState(playlist);
-  const [songCurrent, setSong] = useState(playlistCurrent.songs[0]);
   const [BGColor, setBGColor] = useState(getBGColor(songCurrent.coverURL));
-  const [isAsideActive, setAsideActive] = useState(
-    screenW < 768 ? false : true
-  );
 
-  const asideSwitch = () => {
-    setAsideActive(!isAsideActive);
-  };
+  // const [playlistCurrent, setPlaylist] = useState(playlist);
+  // const [songCurrent, setSong] = useState(playlistCurrent.songs[0]);
 
-  useEffect(() => {
-    getBGColor(songCurrent.coverURL);
-  }, []);
+  // const playlistSwitch = (playlist) => {
+  //   setPlaylist(playlist);
+  //   songSwitch(playlist.songs[0]);
+  // };
 
-  const skipSong = (way) => {
-    setSong(
-      (songCurrent) =>
-        playlistCurrent.songs[playlistCurrent.songs.indexOf(songCurrent) + way]
-    );
-  };
+  // const [isPlaying, setPause] = useState(false);
 
-  const songSwitch = (song) => {
-    setSong(playlistCurrent.songs[playlistCurrent.songs.indexOf(song)]);
-  };
+  // const playSwitch = () => {
+  //   setPause(!isPlaying);
+  // };
 
-  const playlistSwitch = (playlist) => {
-    setPlaylist(playlist);
-    songSwitch(playlist.songs[0]);
-  };
+  const [isLiked, setSongLiked] = useState(); // Redux
 
-  const [isPlaying, setPause] = useState(false);
-
-  const playSwitch = () => {
-    setPause(!isPlaying);
-  };
-
-  const [isHidden, setIsHidden] = useState(true);
-
-  const [isLiked, setSongLiked] = useState(songCurrent.liked); // Redux
-
-  const likeHandlerClick = () => {
+  const likeSwitch = (song) => {
+    const songIsLiked = song.liked;
+    song.liked = !songIsLiked;
     setSongLiked(!isLiked);
   };
 
-
   const cutLabel = (label) => {
-    return label.length > 30 ? label.slice(0, 30).trim() + "...": label;
-  }
+    return label.length > 30 ? label.slice(0, 30).trim() + "..." : label;
+  };
 
   return (
     <div className="pb-[4rem]">
@@ -190,7 +260,8 @@ function App() {
         isAsideActive={isAsideActive}
         playlist={playlistCurrent}
         songCurrent={songCurrent}
-        func={{ songSwitch, asideSwitch }}
+        isLiked={isLiked}
+        func={{ songSwitch, asideSwitch, likeSwitch }}
       />
 
       <MainTrack
@@ -202,98 +273,12 @@ function App() {
         isAsideActive={isAsideActive}
       />
 
-      <div className="fixed z-50 bg-black bottom-0 w-screen flex flex-row items-center h-16">
-        <button
-          onClick={() => skipSong(-1)}
-          disabled={playlistCurrent.songs.indexOf(songCurrent) == 0 ? 1 : 0}
-        >
-          <IconContext.Provider
-            value={{
-              size: "3rem",
-              color:
-                playlistCurrent.songs.indexOf(songCurrent) == 0
-                  ? "gray"
-                  : "#27AE60",
-            }}
-          >
-            <BiSkipPrevious />
-          </IconContext.Provider>
-        </button>
-
-        <button onClick={playSwitch}>
-          <IconContext.Provider value={{ size: "3rem", color: "#27AE60" }}>
-            {isPlaying ? <BiPlay /> : <BiPause />}
-          </IconContext.Provider>
-        </button>
-        <button
-          onClick={() => skipSong(1)}
-          disabled={
-            playlistCurrent.songs.indexOf(songCurrent) ==
-            playlist.songs.length - 1
-              ? 1
-              : 0
-          }
-        >
-          <IconContext.Provider
-            value={{
-              size: "3rem",
-              color:
-                playlistCurrent.songs.indexOf(songCurrent) ==
-                playlist.songs.length - 1
-                  ? "gray"
-                  : "#27AE60",
-            }}
-          >
-            <BiSkipNext />
-          </IconContext.Provider>
-        </button>
-        <div className="max-w-[20rem] flex flex-row">
-          <img
-            className={`h-12 w-12 object-cover rounded-md ml-8 mr-4`}
-            src={songCurrent.coverURL}
-            alt="coverImg"
-          />
-          <div className="flex flex-col">
-            <p className="text-sm text-white font-semibold underline decoration-solid underline-offset-8 leading-loose">
-              {cutLabel(songCurrent.label)}
-            </p>
-            <p className="text-sm text-slate-400">{songCurrent.authors}</p>
-          </div>
-        </div>
-        <button className="pl-6 flex" onClick={likeHandlerClick}>
-          <IconContext.Provider
-            value={{
-              size: "1.5rem",
-              color: "#27AE60",
-            }}
-          >
-            {isLiked ? <BiSolidHeart /> : <BiHeart />}
-          </IconContext.Provider>
-        </button>
-        <button className="pl-4 flex">
-          <IconContext.Provider
-            value={{
-              size: "1.5rem",
-              color: "#27AE60",
-            }}
-          >
-            <BiPlus />
-          </IconContext.Provider>
-        </button>
-        <button
-          className="ml-auto pr-4 flex md:hidden"
-          onClick={() => asideSwitch()}
-        >
-          <IconContext.Provider
-            value={{
-              size: "4rem",
-              color: "#27AE60",
-            }}
-          >
-            <BiMenu />
-          </IconContext.Provider>
-        </button>
-      </div>
+      <ControlCentre
+        songCurrent={songCurrent}
+        playlistCurrent={playlistCurrent}
+        bool={{ isPlaying, isLiked}}
+        func={{ skipSong, playSwitch, cutLabel, asideSwitch, likeSwitch}}
+      />
 
       <PlaylistsPicking
         BGcolor={BGColor}
@@ -318,4 +303,10 @@ function App() {
   );
 }
 
-export default App;
+export default function AppContainer() {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+}
