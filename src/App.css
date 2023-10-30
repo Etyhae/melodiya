@@ -1,24 +1,7 @@
-
 @media (prefers-reduced-motion: no-preference) {
   .song-cover {
     animation: song-cover-spin infinite 20s linear;
   }
-}
-
-.pulse-wrapper {
-  display: inline-block;
-  padding: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-}
-
-.paused {
-  animation-play-state: paused !important;
-}
-
-.fade-enter, .fade-exit {
-  opacity: 0;
-  transform: translateX(100%); 
 }
 
 @keyframes song-cover-spin {
@@ -30,13 +13,14 @@
   }
 }
 
-.song-active {
-  background-color:rgb(148 163 184 / 0.2); /*bg-slate-400*/
+.anim-paused {
+  animation-play-state: paused !important;
 }
 
 /* Стилизация полосы прокрутки */
 ::-webkit-scrollbar {
-  width: 10px; /* Ширина полосы прокрутки */
+  width: 0.5rem; /* Ширина полосы прокрутки */
+  height: 0.4rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -49,54 +33,4 @@
 
 ::-webkit-scrollbar-track {
   background-color: #EEE; /* Цвет фона полосы прокрутки */
-}
-
-.component {
-  background-color: white;
-  width: 25%;
-  max-width: 600px;
-  margin: 1em auto;
-  padding-bottom: 2em;
-  border: 0.1px solid black;
-  border-radius: 10px;
-}
-
-
-.playButton {
-  background: none;
-  border: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.playButton:hover {
-  opacity: 0.8;
-}
-.subTitle {
-  margin-top: -1em;
-  color: #4f4f4f;
-}
-
-.time {
-  margin: 0 auto;
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  color: #828282;
-  font-size: smaller;
-}
-
-.timeline {
-  width: 80%;
-  background-color: #27ae60;
-}
-
-input[type="range"] {
-  background-color: #27ae60;
-}
-
-@media (max-width: 900px) {
-  .component {
-    width: 50%;
-  }
 }
