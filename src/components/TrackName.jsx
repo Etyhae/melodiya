@@ -3,7 +3,7 @@ const TrackName = (props) => {
     <>
       <div className="flex flex-col">
         <p
-          className={`text-${props.sizeLarge} text-white font-semibold underline decoration-solid underline-offset-8 leading-loose`}
+          className={`text-${props.sizeLarge} text-white font-semibold ${props.underline ? "underline decoration-solid underline-offset-8" : ""} leading-loose`}
         >
           {props.song.label}
         </p>

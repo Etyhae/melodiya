@@ -4,12 +4,14 @@ import currentPlaylistReducer from '../reducers/currentPlaylistReducer';
 
 import { configureStore } from "@reduxjs/toolkit";
 import isAuthVisibleReducer from '../reducers/isAuthVisibleReducer';
+import isPlaylistAsideVisibleReducer from '../reducers/isPlaylistAsideVisibleReducer';
 
 export const store = configureStore({
   reducer: {
     isPlaying: isPlayingReducer,
     currentSong: currentSongReducer,
     currentPlaylist: currentPlaylistReducer,
-    isAuthVisible: isAuthVisibleReducer
+    isAuthVisible: isAuthVisibleReducer,
+    isPlaylistAsideVisible: isPlaylistAsideVisibleReducer
   },
 });

@@ -1,38 +1,56 @@
+import { togglePlay } from "../reducers/isPlayingReducer";
+import { togglePlaylistAside } from "../reducers/isPlaylistAsideVisibleReducer";
+import Button from "./Button";
 import TrackName from "./TrackName";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-const SongMainInfo = () => {
+const SongMainInfo = (props) => {
   const isPlaying = useSelector((state) => state.isPlaying.value);
   const currentPlaylist = useSelector((state) => state.currentPlaylist.value);
   const currentSong = useSelector((state) => state.currentSong.value);
-
+  const dispatch = useDispatch();
   return (
-    <>
-      <div
-        className="relative w-full h-screen bg-no-repeat bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${currentSong.cover})`,
-        }}
-      >
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-2 z-1 backdrop-blur-md backdrop-brightness-50">
+    <div
+      className="bg-no-repeat bg-cover bg-fixed bg-center w-screen h-[90vh] md:h-screen"
+      style={{ backgroundImage: `url(${currentSong.cover})` }}
+    >
+      <div className="flex flex-col h-full backdrop-blur-md backdrop-brightness-50 py-4">sent_mail_form_new_en_tplfom
+        <div className="flex flex-col text-center">
           <p className="text-sm text-slate-400">Сейчас играет</p>
-          <p className="text-base text-white">{currentPlaylist.playlistName}</p>
-          <p className="text-sm text-slate-400">by {currentPlaylist.compiler}</p>
-        </div>
-        <div className="absolute inset-x-0 top-1/4 flex flex-col justify-center items-center z-1">
-          <img
-            className={`${
-              isPlaying ? "" : "anim-paused"
-            } w-[25rem] h-[25rem] rounded-full song-cover`}
-            src={currentSong.cover}
-            alt={currentSong.label}
+          <Button
+            type={
+              <p className="text-base text-white">
+                {currentPlaylist.playlistName}
+              </p>
+            }
+            onClick={() => dispatch(togglePlaylistAside())}
           />
-          <div className="text-center">
-            <TrackName song={currentSong} sizeLarge="2xl" sizeSmall="xl" />
+          <p className="text-sm text-slate-400">
+            by {currentPlaylist.compiler}
+          </p>
+        </div>
+        <div className="flex flex-col items-center justify-center h-full">
+          <button onClick={() => dispatch(togglePlay())}>
+            <img
+              className={`${
+                isPlaying ? "" : "anim-paused"
+              } w-[20rem] h-[20rem] md:w-[25rem] md:h-[25rem] rounded-full song-cover`}
+              src={currentSong.cover}
+              alt={currentSong.label}
+            />
+          </button>
+
+          <div className="text-center pt-2">
+            <TrackName
+              song={currentSong}
+              sizeLarge="2xl"
+              sizeSmall="md"
+              underline={true}
+            />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

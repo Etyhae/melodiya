@@ -6,8 +6,8 @@ export const isPlayingSlice = createSlice({
     value: false, // начальное значение
   },
   reducers: {
-    togglePlay: (state) => {
-      state.value = !state.value;
+    togglePlay: (state, action) => {
+      action.payload != undefined ? state.value = action.payload : state.value = !state.value;
     },
   },
 });

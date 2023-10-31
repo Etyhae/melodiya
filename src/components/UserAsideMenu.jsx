@@ -9,12 +9,12 @@ import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { switchVisible } from "../reducers/isAuthVisibleReducer";
 
-const UserAsideMenu = () => {
+const UserAsideMenu = (props) => {
   const dispatch = useDispatch();
 
   return (
     <>
-      <aside className="bg-slate-900/60 h-screen w-screen md:w-[5rem] flex flex-col items-center py-4 gap-y-4 left-0">
+      <aside className={`fixed z-40 bg-slate-900/90 h-screen md:h-[94vh] w-screen md:w-[5rem] flex flex-col items-center py-4 gap-y-4 left-0 ${props.className}`}>
         <Button
           color="#27ae60"
           size="2.5rem"

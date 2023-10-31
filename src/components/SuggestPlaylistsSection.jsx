@@ -10,10 +10,11 @@ const SuggestPlaylistsSection = () => {
   return (
     <>
       <div className="w-full h-64 flex flex-row justify-center gap-x-4">
-        {suggestedPlaylists.map((playlist) => (
+        {suggestedPlaylists.map((playlist, index) => (
           <Playlist
             playlist={playlist}
             onClick={() => dispatch(switchPlaylist(playlist))}
+            key={index}
           />
         ))}
       </div>
