@@ -14,7 +14,7 @@ const SongMainInfo = (props) => {
       className="bg-no-repeat bg-cover bg-fixed bg-center w-screen h-[90vh] md:h-screen"
       style={{ backgroundImage: `url(${currentSong.cover})` }}
     >
-      <div className="flex flex-col h-full backdrop-blur-md backdrop-brightness-50 py-4">sent_mail_form_new_en_tplfom
+      <div className="flex flex-col h-full backdrop-blur-md backdrop-brightness-50 py-4">
         <div className="flex flex-col text-center">
           <p className="text-sm text-slate-400">Сейчас играет</p>
           <Button
@@ -29,7 +29,7 @@ const SongMainInfo = (props) => {
             by {currentPlaylist.compiler}
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center h-4/5">
           <button onClick={() => dispatch(togglePlay())}>
             <img
               className={`${

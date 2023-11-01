@@ -23,7 +23,7 @@ const PlaylistAsideMenu = (props) => {
         isPlaylistAsideVisible
           ? "flex md:fixed md:w-[20rem]"
           : "hidden md:flex md:w-[5rem]"
-      } justify-start bg-slate-900/90 h-screen md:h-[94vh] w-screen backdrop-blur-md flex-col items-center right-0 ${
+      } justify-start bg-slate-900/90 h-screen md:h-[94vh] w-screen backdrop-blur-md flex-col items-center right-0 px-2 ${
         props.className
       }`}
     >
@@ -31,7 +31,7 @@ const PlaylistAsideMenu = (props) => {
         color="27ae60"
         size="3rem"
         type={<BiMenu />}
-        className="flex self-end p-2 pr-4"
+        className="flex self-end p-2"
         onClick={() => dispatch(togglePlaylistAside())}
       />
       {currentPlaylist.songs.map((song) => (

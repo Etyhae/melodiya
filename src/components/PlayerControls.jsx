@@ -18,11 +18,14 @@ import TrackName from "./TrackName";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePlay } from "../reducers/isPlayingReducer";
 import { setLiked, skipSong } from "../reducers/currentSongReducer";
+import AudioPlayer from "./AudioPlayer";
+import { toggleLoop } from "../reducers/isPlayLoopReducer";
 
 const PlayerControls = () => {
   const isPlaying = useSelector((state) => state.isPlaying.value);
   const currentSong = useSelector((state) => state.currentSong.value);
   const currentPlaylist = useSelector((state) => state.currentPlaylist.value);
+  const isLoop = useSelector((state) => state.isPlayLoop.value);
   const dispatch = useDispatch();
 
   const isFirstSong = currentPlaylist.songs.indexOf(currentSong) === 0;
@@ -40,9 +43,9 @@ const PlayerControls = () => {
 
   return (
     <>
-      <div className="fixed z-50 bottom-0 bg-black flex flex-col md:flex-row py-2 px-4 gap-y-2 md:gap-y-0 md:px-20 w-screen h-32 md:h-16 md:items-center gap-x-12">
-        <div className="flex flex-row px-2">
-          <div className="flex gap-x-2 items-center">
+      <div className="fixed z-50 bottom-0 bg-black flex flex-col lg:flex-row py-2 px-4 lg:px-24 gap-y-2 md:gap-y-0 md:px-5 w-screen h-32 lg:h-16 md:items-center ">
+        <div className="flex flex-row sm:px-24 md:px-2 items-center">
+          <div className="flex items-center gap-x-2">
             <Button
               color={isFirstSong ? "#a4a4a4" : "#27ae60"}
               size="3rem"
@@ -60,10 +63,10 @@ const PlayerControls = () => {
             />
             <Button
               color="white"
-              size="2rem"
+              size="1.8rem"
               type={currentSong.liked ? <BiSolidHeart /> : <BiHeart />}
               onClick={() => dispatch(setLiked())}
-              className="flex md:hidden pr-6"
+              className="flex md:hidden pr-2 sm:pr-6"
             />
             <Button
               color={isLastSong ? "a4a4a4" : "#27ae60"}
@@ -73,9 +76,9 @@ const PlayerControls = () => {
               onClick={() => skipSongClick(1)}
               className="hidden md:flex"
             />
-            <div className="text-left flex gap-x-4 justify-start">
+            <div className="flex gap-x-4 justify-start text-left w-full">
               <img
-                className="rounded-md w-12 h-12"
+                className="rounded-md w-12 h-12 flex self-center"
                 src={currentSong.cover}
                 alt={currentSong.label}
               />
@@ -92,44 +95,45 @@ const PlayerControls = () => {
               color="27ae60"
               size="2rem"
               type={<BiVolumeFull />}
-              className="hidden md:flex"
+              className="hidden lg:flex"
             />
             <Button
               color="27ae60"
               size="2rem"
               type={<BiDotsVerticalRounded />}
-              className="hidden md:flex"
+              className="hidden lg:flex"
             />
             <Button
               color="white"
               size="2rem"
               type={currentSong.liked ? <BiSolidHeart /> : <BiHeart />}
               onClick={() => dispatch(setLiked())}
-              className="hidden md:flex"
+              className="hidden lg:flex"
             />
             <Button
               color="#27ae60"
               size="3rem"
               type={isPlaying ? <BiPause /> : <BiPlay />}
               onClick={() => dispatch(togglePlay())}
-              className="flex md:hidden"
+              className="flex justify-self-end lg:hidden"
             />
           </div>
         </div>
-        <div className="hidden md:flex flex-row ml-auto md:m-0 md:pl-4 gap-x-4">
+        <div className="hidden md:flex flex-row md:m-0 gap-x-4 justify-between">
           <Button
             color="white"
             size="1.5rem"
-            type={currentSong.liked ? <BiSolidHeart /> : <BiHeart />}
+            type={currentSong.liked ? <BiSolidHeart color="27ae60"/> : <BiHeart />}
             onClick={() => dispatch(setLiked())}
           />
-          <Button color="white" size="1.5rem" type={<BiRepeat />} />
+          <Button color={isLoop ? "#27ae60" : "#FFFFFF"} size="1.5rem" type={<BiRepeat />} onClick={() => dispatch(toggleLoop())}/>
+          <AudioPlayer songURL={currentSong.songURL}/>
         </div>
-        <div className="ml-auto hidden md:flex flex-row gap-x-4 pr-4">
+        <div className="ml-auto hidden lg:flex flex-row gap-x-4 pr-4">
           <Button color="27ae60" size="2rem" type={<BiVolumeFull />} />
           <Button color="27ae60" size="2rem" type={<BiDotsVerticalRounded />} />
         </div>
-        <div className="md:hidden flex flex-row justify-around items-center content-center h-full py-2">
+        <div className="md:hidden flex flex-row justify-evenly items-center content-center h-full py-2">
           <Button color="a4a4a4" size="2.5rem" type={<BiSolidUserCircle />} />
           <Button color="a4a4a4" size="2.5rem" type={<BiSearch />} />
           <Button color="a4a4a4" size="2.5rem" type={<BiBookHeart />} />
