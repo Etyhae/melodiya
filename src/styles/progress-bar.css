@@ -3,7 +3,7 @@ input[type="range"]::before {
   }
   
   :root {
-    --track-width: 50vw;
+    --track-width: 40vw;
     --track-height: 0.5rem;
     --thumb-height: 0.5rem;
     --thumb-width: 1rem;

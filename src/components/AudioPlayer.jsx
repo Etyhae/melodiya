@@ -1,20 +1,29 @@
 import React, {useState, useRef, useEffect, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/progress-bar.css";
+import { skipSong } from "../reducers/currentSongReducer";
 
-const AudioPlayer = ({ songURL }) => {
+const AudioPlayer = () => {
   const isPlaying = useSelector((state) => state.isPlaying.value);
   const isLoop = useSelector((state) => state.isPlayLoop.value);
+  const currentPlaylist = useSelector((state) => state.currentPlaylist.value);
+  const currentSong = useSelector((state) => state.currentSong.value);
 
   const audioRef = useRef();
   const progressBarRef = useRef();
+
+  const dispatch = useDispatch();
 
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
-    console.log(progressBarRef.current.value);
+  };
+
+  const skipSongClick = (way) => {
+    dispatch(skipSong(currentPlaylist.songs[currentPlaylist.songs.indexOf(currentSong) + way])
+    );
   };
 
   const playAnimationRef = useRef();
@@ -68,9 +77,13 @@ const AudioPlayer = ({ songURL }) => {
     }
   }, [isPlaying, audioRef]);
 
+  const isLastSong =
+  currentPlaylist.songs.indexOf(currentSong) ===
+  currentPlaylist.songs.length - 1;
+
   return (
-    <div className="flex flex-row justify-center content-center items-center ">
-      <audio src={songURL} ref={audioRef} onLoadedMetadata={onLoadedMetadata} loop={isLoop} />
+    <div className="flex flex-row justify-center content-center items-center">
+      <audio src={currentSong.songURL} ref={audioRef} onLoadedMetadata={onLoadedMetadata} loop={isLoop} onEnded={() => isLastSong ? '' : skipSongClick(1)} />
       <div className="text-white flex flex-row justify-around">
         <span className="time current p-2">{formatTime(timeProgress)}</span>
         <input

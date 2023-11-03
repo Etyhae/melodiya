@@ -6,6 +6,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import isAuthVisibleReducer from '../reducers/isAuthVisibleReducer';
 import isPlaylistAsideVisibleReducer from '../reducers/isPlaylistAsideVisibleReducer';
 import isPlayLoopReducer from '../reducers/isPlayLoopReducer';
+import isUserAsideActiveReducer from '../reducers/isUserAsideActiveReducer';
+import userAsideStateReducer from '../reducers/userAsideStateReducer';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     currentPlaylist: currentPlaylistReducer,
     isAuthVisible: isAuthVisibleReducer,
     isPlaylistAsideVisible: isPlaylistAsideVisibleReducer,
-    isPlayLoop: isPlayLoopReducer
+    isPlayLoop: isPlayLoopReducer,
+    isUserAsideActive: isUserAsideActiveReducer,
+    userAsideState: userAsideStateReducer
   },
 });

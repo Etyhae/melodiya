@@ -7,7 +7,6 @@ import { BiLogoGoogle, BiLogoTelegram, BiLogoVk } from "react-icons/bi";
 
 const AuthModal = () => {
   const isAuthVisible = useSelector((state) => state.isAuthVisible.value);
-  const currentSong = useSelector((state) => state.currentSong.value);
   const dispatch = useDispatch();
 
   return (
@@ -22,7 +21,7 @@ const AuthModal = () => {
           bottom: "auto",
           marginRight: "-50%",
           transform: "translate(-50%, -50%)",
-          width: "25rem",
+          width: "24rem",
           height: "60%",
           borderRadius: "50px",
           border: "4px solid #27ae60"
