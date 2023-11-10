@@ -1,0 +1,82 @@
+input[type="range"]::before {
+    width: var(--range-progress); 
+  }
+  
+  :root {
+    --track-width: 40vw;
+    --track-height: 0.5rem;
+    --thumb-height: 0.5rem;
+    --thumb-width: 1rem;
+    --slate-900: rgb(15, 23, 42, 0.9);
+    --slate-600: rgba(38, 58, 105, 0.9);
+    --accent-color: #27ae60;
+  }
+
+  input[type="range"] {
+    --range-progress: 0;
+    -webkit-appearance: none;
+     appearance: none;
+     background: transparent;
+     cursor: pointer;
+     width: var(--track-width);
+  }
+  
+  input[type="range"]:focus {
+   outline: none;
+  }
+  
+  /***** Chrome, Safari, Opera and Edge Chromium styles *****/
+  input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--slate-900);
+    border-radius: 1rem;
+    height: var(--track-height);
+  }
+  
+  input[type="range"]::-webkit-slider-runnable-track:hover {
+    background-color: var(--slate-600);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: calc(var(--track-height) / 2 - var(--thumb-height) / 2);
+  
+    background-color: #2fd172;
+    height: var(--thumb-height);
+    width: var(--thumb-width);
+    border-radius: 1rem;
+  }
+  
+  input[type="range"]:hover::-webkit-slider-thumb {   
+   border: 1px solid #1d8448;
+   outline: 3px solid #1d8448;
+  }
+  
+  /******** Firefox styles ********/
+  input[type="range"]::-moz-range-track {
+    background-color: var(--slate-900);
+    border-radius: 0.5rem;
+    height: 0.5rem;
+  }
+  
+  input[type="range"]::-moz-range-track:hover {
+    background-color: var(--slate-600);
+  }
+  
+  /* slider thumb */
+  input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: calc(var(--track-height) / 2 - var(--thumb-height) / 2);
+  
+    background-color: #2fd172;
+    height: var(--thumb-height);
+    width: var(--thumb-width);
+    border-radius: 1rem;
+  }
+  
+  input[type="range"]:hover::-moz-range-thumb {
+   border: 1px solid #053a5f;
+   outline: 3px solid #053a5f;
+   outline-offset: 0.125rem; 
+  }
