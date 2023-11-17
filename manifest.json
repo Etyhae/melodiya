@@ -1,0 +1,8 @@
+{
+  "name": "Melodiya",
+  "short_name": "Melodiya",
+  "start_url": ".",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
