@@ -19,7 +19,6 @@ import { togglePlay } from "../reducers/isPlayingReducer";
 import { setLiked, skipSong } from "../reducers/currentSongReducer";
 import AudioPlayer from "./AudioPlayer";
 import { toggleLoop } from "../reducers/isPlayLoopReducer";
-import { truncateLabel } from "../utils/truncateLabel";
 import { switchVisible } from "../reducers/isAuthVisibleReducer";
 import {
   toggleAsideLiked,
@@ -62,10 +61,10 @@ const PlayerControls = () => {
 
   const dispatch = useDispatch();
 
-  const isFirstSong = currentPlaylist.songs.indexOf(currentSong) === 0;
-  const isLastSong =
-    currentPlaylist.songs.indexOf(currentSong) ===
-    currentPlaylist.songs.length - 1;
+  const currentIndex = currentPlaylist.songs.indexOf(currentSong);
+
+  const isFirstSong = currentIndex === 0;
+  const isLastSong = currentIndex === currentPlaylist.songs.length - 1;
 
   const skipSongClick = (way) => {
     dispatch(
@@ -110,15 +109,15 @@ const PlayerControls = () => {
               onClick={() => skipSongClick(1)}
               className="hidden md:flex"
             />
-            <div className="flex gap-x-4 justify-start text-left w-64 md:pr-8">
+            <div className="flex gap-x-4 justify-start text-left w-64 md:pr-8 md:mr-4">
               <img
                 className="rounded-md w-12 h-12 flex self-center"
                 src={currentSong.cover}
                 alt={currentSong.label}
               />
               <TrackName
-                label={truncateLabel(currentSong.label, 92)}
-                authors={truncateLabel(currentSong.authors, 125)}
+                label={currentSong.label}
+                authors={currentSong.authors}
                 sizeLarge="sm"
                 sizeSmall="xs"
                 underline={true}

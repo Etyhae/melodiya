@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/progress-bar.css";
 import { skipSong } from "../reducers/currentSongReducer";
@@ -22,7 +22,10 @@ const AudioPlayer = () => {
   };
 
   const skipSongClick = (way) => {
-    dispatch(skipSong(currentPlaylist.songs[currentPlaylist.songs.indexOf(currentSong) + way])
+    dispatch(
+      skipSong(
+        currentPlaylist.songs[currentPlaylist.songs.indexOf(currentSong) + way]
+      )
     );
   };
 
@@ -33,13 +36,12 @@ const AudioPlayer = () => {
     setTimeProgress(currentTime);
     progressBarRef.current.value = currentTime;
     progressBarRef.current.style.setProperty(
-      '--range-progress',
+      "--range-progress",
       `${(progressBarRef.current.value / duration) * 100}%`
     );
 
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [audioRef, duration, progressBarRef, setTimeProgress]);
-
 
   useEffect(() => {
     if (isPlaying) {
@@ -59,14 +61,12 @@ const AudioPlayer = () => {
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
       const minutes = Math.floor(time / 60);
-      const formatMinutes =
-        minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
       const seconds = Math.floor(time % 60);
-      const formatSeconds =
-        seconds < 10 ? `0${seconds}` : `${seconds}`;
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
       return `${formatMinutes}:${formatSeconds}`;
     }
-    return '00:00';
+    return "00:00";
   };
 
   useEffect(() => {
@@ -77,13 +77,26 @@ const AudioPlayer = () => {
     }
   }, [isPlaying, audioRef]);
 
-  const isLastSong =
-  currentPlaylist.songs.indexOf(currentSong) ===
-  currentPlaylist.songs.length - 1;
+  const currentIndex = currentPlaylist.songs.indexOf(currentSong);
+  const firstSong = currentPlaylist.songs[0];
+
+  const isLastSong = currentIndex === currentPlaylist.songs.length - 1;
 
   return (
     <div className="flex flex-row justify-center content-center items-center">
-      <audio src={currentSong.songURL} ref={audioRef} onLoadedMetadata={onLoadedMetadata} loop={isLoop} onEnded={() => isLastSong ? '' : skipSongClick(1)} />
+      <audio
+        src={currentSong.songURL}
+        ref={audioRef}
+        onLoadedMetadata={onLoadedMetadata}
+        // loop={isLoop}
+        onEnded={() =>
+          isLastSong
+            ? isLoop
+              ? dispatch(skipSong(firstSong))
+              : ""
+            : skipSongClick(1)
+        }
+      />
       <div className="text-white flex flex-row justify-around">
         <span className="time current p-2">{formatTime(timeProgress)}</span>
         <input
