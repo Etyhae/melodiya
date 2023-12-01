@@ -1,7 +1,7 @@
 const TrackName = ({ label, authors, underline, sizeLarge, sizeSmall }) => {
   return (
     <>
-      <div className="flex flex-col w-10/12">
+      <div className="flex flex-col w-full">
         <p
           className={`text-${sizeLarge} text-white font-semibold ${
             underline ? "underline decoration-solid underline-offset-8" : ""

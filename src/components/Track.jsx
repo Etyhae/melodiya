@@ -11,7 +11,7 @@ const Track = ({ song, onClick, full }) => {
     <>
       <button
         className={`flex flex-row w-full border-slate-400  hover:outline outline-2 outline-[#27ae60] p-2 hover:opacity-80 ${
-          song === currentSong ? "bg-slate-400/30" : ""
+          song.id === currentSong.id ? "bg-slate-400/30" : ""
         }
       ${
         full
