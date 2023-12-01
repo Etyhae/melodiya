@@ -29,7 +29,6 @@ const Totally = {
   label: "Totally Spices",
   authors: "Lead Horizon",
   songURL: "./test-songs/24343.mp3",
-  cover:
     "https://avatars.yandex.net/get-music-content/6300975/ce8be800.a.23127932-1/800x800",
   liked: false,
   listensCount: 10000,
