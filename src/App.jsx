@@ -6,19 +6,21 @@ import PlayerControls from "./components/PlayerControls";
 import SuggestPlaylistsSection from "./components/SuggestPlaylistsSection";
 import AuthModal from "./components/AuthModal";
 import UserAsideAdvanced from "./components/UserAsideAdvanced";
+import PlaylistModal from "./components/PlaylistModal";
 
 function App() {
   return (
     <div className=" pb-32 md:pb-12">
       <div className="w-screen flex flex-row">
-        <UserAsideMenu className="hidden md:flex"/>
+        <UserAsideMenu className="hidden md:flex" />
         <UserAsideAdvanced />
         <SongMainInfo />
         <PlaylistAsideMenu />
       </div>
       <SuggestPlaylistsSection />
-      <AuthModal/>
+      <AuthModal />
       <PlayerControls />
+      <PlaylistModal />
     </div>
   );
 }

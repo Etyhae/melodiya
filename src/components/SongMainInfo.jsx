@@ -6,27 +6,24 @@ import TrackName from "./TrackName";
 import { useSwipeable } from "react-swipeable";
 import { useSelector, useDispatch } from "react-redux";
 import MainTrackMobile from "./MainTrackMobile";
-import TrackMainNext from "./TrackMainNext";
 import { skipSong } from "../reducers/currentSongReducer";
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useCallback } from "react";
 
-
-const SongMainInfo = (props) => {
+const SongMainInfo = () => {
   const isPlaying = useSelector((state) => state.isPlaying.value);
   const currentPlaylist = useSelector((state) => state.currentPlaylist.value);
   const currentSong = useSelector((state) => state.currentSong.value);
-  const nextSong =
-    currentPlaylist.songs[currentPlaylist.songs.indexOf(currentSong) + 1];
-  const previousSong =
-    currentPlaylist.songs[currentPlaylist.songs.indexOf(currentSong) - 1];
 
-  const isFirstSong = currentPlaylist.songs.indexOf(currentSong) === 0;
-  const isLastSong =
-    currentPlaylist.songs.indexOf(currentSong) ===
-    currentPlaylist.songs.length - 1;
+  const currentIndex = currentPlaylist.songs.indexOf(currentSong);
 
-    const x = useMotionValue(0);
+  const nextSong = currentPlaylist.songs[currentIndex + 1];
+  const previousSong = currentPlaylist.songs[currentIndex - 1];
+
+  const isFirstSong = currentIndex === 0;
+  const isLastSong = currentIndex === currentPlaylist.songs.length - 1;
+
+  const x = useMotionValue(0);
   const config = {
     delta: 0, // min distance(px) before a swipe starts. *See Notes*
     preventScrollOnSwipe: false, // prevents scroll during swipe (*See Details*)
@@ -45,22 +42,22 @@ const SongMainInfo = (props) => {
       [x]
     ),
     onSwipedRight: () => {
-      const prevSongIndex = currentPlaylist.songs.indexOf(currentSong) - 1;
-      if (prevSongIndex >= 0 )  { dispatch(skipSong(currentPlaylist.songs[prevSongIndex]))};
+      if (!isFirstSong) {
+        dispatch(skipSong(previousSong));
+      }
       x.set(0);
     },
 
     onSwipedLeft: () => {
-      const nextSongIndex = currentPlaylist.songs.indexOf(currentSong) + 1;
-      if (nextSongIndex < currentPlaylist.songs.length) {
-        dispatch(skipSong(currentPlaylist.songs[nextSongIndex]));
+      if (!isLastSong) {
+        dispatch(skipSong(nextSong));
       }
       x.set(0);
     },
     onTouchEndOrOnMouseUp: () => {
       x.set(0);
     },
-    ...config
+    ...config,
   });
 
   const dispatch = useDispatch();
@@ -84,7 +81,7 @@ const SongMainInfo = (props) => {
             by {currentPlaylist.compiler}
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center h-3/4 ">
+        <div className="flex flex-col items-center justify-center h-3/4">
           <button onClick={() => dispatch(togglePlay())}>
             <img
               className={`${
@@ -106,9 +103,9 @@ const SongMainInfo = (props) => {
           </div>
         </div>
       </div>
-      <motion.div 
+      <motion.div
         key={currentSong.id}
-        style={{x}}  
+        style={{ x }}
         {...swipeHandlers}
         className="flex flex-col h-full backdrop-blur-md backdrop-brightness-50 py-4 sm:hidden"
       >

@@ -1,18 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { playlist } from "../playlistWithSongs"
+import { createSlice } from "@reduxjs/toolkit";
+import { AGGRESSIVEplaylist } from "../playlistWithSongs";
 
+const songInitialState =
+  JSON.parse(localStorage.getItem("song")) || AGGRESSIVEplaylist.songs[0];
 
 export const currentSongSlice = createSlice({
   name: "currentSong",
   initialState: {
-    value: playlist.songs[0],
+    value: songInitialState,
   },
   reducers: {
     switchSong: (state, action) => {
       state.value = action.payload;
+      localStorage.setItem("song", JSON.stringify(state.value));
     },
     skipSong: (state, action) => {
       state.value = action.payload;
+      localStorage.setItem("song", JSON.stringify(state.value));
     },
     setLiked: (state) => {
       return {
